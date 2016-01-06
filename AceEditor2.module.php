@@ -53,7 +53,7 @@ class AceEditor2 extends CMSModule
 					  enableLiveAutocompletion: true,
 					  highlightGutterLine: true,
 					  wrap: 120,
-					  fontSize: '16px'
+					  // fontSize: '16px'
 				  });
 			   });
 			})

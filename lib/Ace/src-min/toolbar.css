@@ -5,6 +5,7 @@
 	-moz-box-shadow:    inset 0px 11px 16px 0px rgba(86, 86, 86, 0.5);
 	box-shadow:         inset 0px 11px 16px 0px rgba(86, 86, 86, 0.5);
 	border-radius: 7px 7px 0 0;
+	color: white;
 }
 
 #AceBottombar {
@@ -17,8 +18,9 @@
 	margin: -3px 0 0 0;
 }
 
-.AceModeSelect {
+.AceModeSelect, .AceTextSize {
 	margin: 10px 0 0 20px;
+	float: left;
 }
 
 /* Reset Ace Editor margin to zero */
