@@ -16,26 +16,40 @@ class AceEditor2 extends CMSModule
 
     public function HasCapability($capability, $params = array())
     {
-        if( $capability == CmscoreCapabilities::SYNTAX_MODULE ) return TRUE;
+        if( $capability == CmsCoreCapabilities::SYNTAX_MODULE ) return TRUE;
         return FALSE;
     }
 
     public function SyntaxGenerateHeader()
     {
-        $aceditor = $this->GetModuleURLPath().'/lib/Ace/src-min/ace.js';
-        $out = <<<EOT
-			<script type="text/javascript" src="{$aceditor}"></script>
+		$script_includes = array('ace.js','theme-twilight.js','mode-css.js','mode-smarty.js','ext-language_tools.js','toolbar.js');
+		$toolbarcss = $this->GetModuleURLPath().'/lib/Ace/src-min/toolbar.css';
+		
+		$out = '';
+		
+		foreach($script_includes as $script_include) {
+			$out .= '<script src="'.$this->GetModuleURLPath().'/lib/Ace/src-min/'.$script_include.'"></script>';
+		}
+		
+        $out .= <<<EOT
+			<link rel="stylesheet" type="text/css" href="{$toolbarcss}">
 			<script type="text/javascript">
 			$(document).ready(function(){
 			   $('textarea.AceEditor2').each(function(){
 				  var editor = ace.edit($(this).get(0));
+				  addToolBar(editor);
 				  editor.setTheme('ace/theme/twilight');
+				  editor.getSession().setMode('ace/mode/css');
+				  editor.setOptions({
+					  enableBasicAutocompletion: true,
+					  enableLiveAutocompletion: true
+				  });
 			   });
 			})
 			</script>
 			<style type="text/css">
 			.ace_editor {
-			   width: 90%;
+			   width: 100%;
 			   min-height: 50em;
 			}
 			</style>

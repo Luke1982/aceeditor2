@@ -1,0 +1,10 @@
+#AceToolbar {
+	width: 100%;
+	height: 50px;
+	background: #141414;
+}
+
+/* Reset Ace Editor margin to zero */
+.ace_editor {
+	margin: 0;
+}
