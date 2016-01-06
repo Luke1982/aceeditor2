@@ -30,7 +30,10 @@ class AceEditor2 extends CMSModule
 		$AceModes = json_encode(array(
 			'CSS'		=>		'css',
 			'Smarty'	=>		'smarty',
-			'HTML'		=>		'html'
+			'HTML'		=>		'html',
+			'Javascript'=>		'javascript',
+			'JSON'		=>		'json',
+			'PHP'		=>		'php'
 		));
 		
 		$out = '';
@@ -62,7 +65,7 @@ class AceEditor2 extends CMSModule
 			</script>
 			<style type="text/css">
 			.ace_editor {
-			   width: 90%;
+			   width: 95%;
 			   height: 800px;
 			   border: 0;
 			}
