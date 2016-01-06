@@ -45,9 +45,9 @@ class AceEditor2 extends CMSModule
 			$(document).ready(function(){
 			   $('textarea.AceEditor2').each(function(){
 				  var editor = ace.edit($(this).get(0));
-				  addToolBar(editor, '{$this->GetModuleURLPath()}', {$AceModes});
+				  var currentMode = $(this).attr('data-cms-lang');
+				  addToolBar(editor, '{$this->GetModuleURLPath()}', {$AceModes}, currentMode);
 				  editor.setTheme('ace/theme/twilight');
-				  editor.getSession().setMode('ace/mode/css');
 				  editor.setOptions({
 					  enableBasicAutocompletion: true,
 					  enableLiveAutocompletion: true,
