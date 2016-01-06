@@ -22,8 +22,16 @@ class AceEditor2 extends CMSModule
 
     public function SyntaxGenerateHeader()
     {
-		$script_includes = array('ace.js','theme-twilight.js','mode-css.js','mode-smarty.js','ext-language_tools.js','toolbar.js');
+		$script_includes = array('ace.js','theme-twilight.js','ext-language_tools.js','toolbar.js');
 		$toolbarcss = $this->GetModuleURLPath().'/lib/Ace/src-min/toolbar.css';
+		
+		// Setup the modes you want to support, the array key is the select box label,
+		// The value is the filename (mode-{FILENAME}.js)
+		$AceModes = json_encode(array(
+			'CSS'		=>		'css',
+			'Smarty'	=>		'smarty',
+			'HTML'		=>		'html'
+		));
 		
 		$out = '';
 		
@@ -37,7 +45,7 @@ class AceEditor2 extends CMSModule
 			$(document).ready(function(){
 			   $('textarea.AceEditor2').each(function(){
 				  var editor = ace.edit($(this).get(0));
-				  addToolBar(editor);
+				  addToolBar(editor, '{$this->GetModuleURLPath()}', {$AceModes});
 				  editor.setTheme('ace/theme/twilight');
 				  editor.getSession().setMode('ace/mode/css');
 				  editor.setOptions({

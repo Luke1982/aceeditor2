@@ -4,6 +4,10 @@
 	background: #141414;
 }
 
+.AceModeSelect {
+	margin: 10px 0 0 20px;
+}
+
 /* Reset Ace Editor margin to zero */
 .ace_editor {
 	margin: 0;
