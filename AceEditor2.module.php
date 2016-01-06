@@ -50,15 +50,19 @@ class AceEditor2 extends CMSModule
 				  editor.getSession().setMode('ace/mode/css');
 				  editor.setOptions({
 					  enableBasicAutocompletion: true,
-					  enableLiveAutocompletion: true
+					  enableLiveAutocompletion: true,
+					  highlightGutterLine: true,
+					  wrap: 120,
+					  fontSize: '16px'
 				  });
 			   });
 			})
 			</script>
 			<style type="text/css">
 			.ace_editor {
-			   width: 100%;
-			   min-height: 50em;
+			   width: 90%;
+			   height: 800px;
+			   border: 0;
 			}
 			</style>
 EOT;
