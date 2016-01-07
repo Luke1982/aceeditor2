@@ -18,7 +18,7 @@
 	margin: -3px 0 0 0;
 }
 
-.AceModeSelect, .AceTextSize {
+.AceModeSelect, .AceTextSize, .AceJumpToLine {
 	margin: 10px 0 0 20px;
 	float: left;
 }
