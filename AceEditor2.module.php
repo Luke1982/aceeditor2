@@ -5,7 +5,7 @@ class AceEditor2 extends CMSModule
 	const MANAGE_PERM = 'manage_ace';
 	
     public function GetName() { return basename(__CLASS__); }
-    public function GetVersion() { return 0.1; }
+    public function GetVersion() { return 0.2; }
     public function GetFriendlyName() { return 'Ace Editor 2.0'; }
     public function GetAdminDescription() { return 'Ace Editor Implementation for CMSMS 2.x series'; }
 	public function IsPluginModule() { return FALSE; }
@@ -33,8 +33,19 @@ class AceEditor2 extends CMSModule
 			'HTML'		=>		'html',
 			'Javascript'=>		'javascript',
 			'JSON'		=>		'json',
-			'PHP'		=>		'php'
+			'PHP'		=>		'php',
+			'SASS'		=>		'sass',
+			'LESS'		=>		'less'
 		));
+		
+		// Get the preferences
+		$prefs = $this->GetCurrentAcePrefs();
+		// Set the width, based on the width type preferences
+		if ($prefs['editor_width_type'] == 'pc') {
+			$width = $prefs['editor_width_pc'].'%';
+		} else {
+			$width = $prefs['editor_width_px'].'px';
+		}
 		
 		$out = '';
 		
@@ -49,7 +60,8 @@ class AceEditor2 extends CMSModule
 			   $('textarea.AceEditor2').each(function(){
 				  var editor = ace.edit($(this).get(0));
 				  var currentMode = $(this).attr('data-cms-lang');
-				  addToolBar(editor, '{$this->GetModuleURLPath()}', {$AceModes}, currentMode);
+				  var cssPrefMode = '{$prefs['editor_css_prefmode']}';
+				  addToolBar(editor, '{$this->GetModuleURLPath()}', {$AceModes}, currentMode, cssPrefMode);
 				  editor.setTheme('ace/theme/twilight');
 				  editor.setOptions({
 					  enableBasicAutocompletion: true,
@@ -65,13 +77,32 @@ class AceEditor2 extends CMSModule
 			</script>
 			<style type="text/css">
 			.ace_editor {
-			   width: 95%;
-			   height: 800px;
+			   width: {$width};
+			   height: {$prefs['editor_height_px']}px;
 			   border: 0;
 			}
 			</style>
 EOT;
         return $out;
     }
+	
+	public function UninstallPreMessage() { 
+		return $this->Lang('ask_uninstall');
+	}
+	
+	// Method to save the settings in the database from the admin panel
+	public function SavePreference($prefname, $value) {
+		$db 			= \cms_utils::get_db();
+		$sql 			= 'UPDATE '.CMS_DB_PREFIX.'mod_ace_editor2 SET '.$prefname.' = ? WHERE id = ?';
+		$insert_array	= array($value, 1);
+		$db->Execute($sql, $insert_array);
+	}
+	
+	public function GetCurrentAcePrefs() {
+		$db 			= \cms_utils::get_db();
+		$sql			= 'SELECT * from '.CMS_DB_PREFIX.'mod_ace_editor2 WHERE id = ?';
+		$row			= $db->GetRow($sql, array(1));
+		return $row;
+	}
 }
 ?>
