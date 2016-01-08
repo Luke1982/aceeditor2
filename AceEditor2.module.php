@@ -5,7 +5,7 @@ class AceEditor2 extends CMSModule
 	const MANAGE_PERM = 'manage_ace';
 	
     public function GetName() { return basename(__CLASS__); }
-    public function GetVersion() { return 0.2; }
+    public function GetVersion() { return 1; }
     public function GetFriendlyName() { return 'Ace Editor 2.0'; }
     public function GetAdminDescription() { return 'Ace Editor Implementation for CMSMS 2.x series'; }
 	public function IsPluginModule() { return FALSE; }
