@@ -31,6 +31,16 @@
  *
  * ------------------------------------------------------------------------
 *}
+<script>
+$(window).load(function(){
+	// Start out by filling out the input field with the currently selected width
+	$('#AceWidthDisplay').attr('value',$('#AceWidthPcSlider').val()+'%');
+	// Update the input field when slider changes
+	$('#AceWidthPcSlider').change(function(){
+		$('#AceWidthDisplay').attr('value',$('#AceWidthPcSlider').val()+'%');
+	});
+});
+</script>
 {form_start}
 <div class="pageoverflow">
 	<h3>{$mod->Lang('prefspage_title')}</h3>
@@ -44,19 +54,20 @@
 			<option value="pc"{if $editor_width_type == 'pc'} selected{/if}>{$mod->Lang('width_pref_percent')}</option>
 			<option value="px"{if $editor_width_type == 'px'} selected{/if}>{$mod->Lang('width_pref_pixels')}</option>
 		</select>
-	</p>
+	</p><br />
 </div>
 <div class="pageoverflow">
 	<label for="editor_width_pc">{$mod->Lang('width_perc_label')}</label><br />
 	<p class="pageinput">
-		<input type="range" min="10" max="95" value="{$editor_width_pc}" step="5" name="{$actionid}editor_width_pc">
-	</p>
+		<input type="range" min="10" max="95" value="{$editor_width_pc}" step="5" name="{$actionid}editor_width_pc" id="AceWidthPcSlider"><br>
+		<input type="text" size="5" id="AceWidthDisplay" value="" readonly>
+	</p><br />
 </div>
 <div class="pageoverflow">
-	<label for="editor_width_px">{$mod->Lang('width_pixels_label')}</label><br />
+	<label for="editor_width_px">{$mod->Lang('width_pixels_label')}</label>
 	<p class="pageinput">
 		<input type="text" size="20" name="{$actionid}editor_width_px" value="{$editor_width_px}">
-	</p>
+	</p><br />
 </div>
 <div class="pageoverflow">
 	<label for="editor_height_px">{$mod->Lang('height_pixels_label')}</label><br />
