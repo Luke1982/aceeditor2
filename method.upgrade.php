@@ -32,11 +32,11 @@
  *
  * ------------------------------------------------------------------------- */
 
- $dir = __DIR__;
 switch($oldversion) {
 	case "1":
 		// delete toolbar files in the Ace library folder.
 		// They've been moved to lib/js and lib/css
+		$dir = __DIR__;
 		unlink($dir.'/lib/Ace/src-min/toolbar.css');
 		unlink($dir.'/lib/Ace/src-min/toolbar.js');
 	break;
