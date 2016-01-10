@@ -76,6 +76,36 @@ class AceEditor2 extends CMSModule
         if( $capability == CmsCoreCapabilities::SYNTAX_MODULE ) return TRUE;
         return FALSE;
     }
+	
+	public function GetHelp() {
+		$smarty = cmsms()->GetSmarty();
+		
+		$smarty->assign('help_title',$this->Lang('help_title'));
+		$smarty->assign('help_p1',$this->Lang('help_p1'));
+		$smarty->assign('help_h1',$this->Lang('help_h1'));
+		$smarty->assign('help_p2',$this->Lang('help_p2'));
+		$smarty->assign('help_h2',$this->Lang('help_h2'));
+		$smarty->assign('help_p3',$this->Lang('help_p3'));
+		$smarty->assign('help_feat_listitem1',$this->Lang('help_feat_listitem1'));
+		$smarty->assign('help_feat_listitem2',$this->Lang('help_feat_listitem2'));
+		$smarty->assign('help_feat_listitem3',$this->Lang('help_feat_listitem3'));
+		$smarty->assign('help_feat_listitem4',$this->Lang('help_feat_listitem4'));
+		$smarty->assign('help_feat_listitem5',$this->Lang('help_feat_listitem5'));
+		$smarty->assign('help_feat_listitem6',$this->Lang('help_feat_listitem6'));
+		$smarty->assign('help_h3',$this->Lang('help_h3'));
+		$smarty->assign('help_p4',$this->Lang('help_p4'));
+		$smarty->assign('help_prefs_listitem1',$this->Lang('help_prefs_listitem1'));
+		$smarty->assign('help_prefs_listitem2',$this->Lang('help_prefs_listitem2'));
+		$smarty->assign('help_prefs_listitem3',$this->Lang('help_prefs_listitem3'));
+		$smarty->assign('help_prefs_listitem4',$this->Lang('help_prefs_listitem4'));
+		$smarty->assign('help_prefs_listitem5',$this->Lang('help_prefs_listitem5'));
+		$smarty->assign('help_h4',$this->Lang('help_h4'));
+		$smarty->assign('help_p5',$this->Lang('help_p5'));
+		$smarty->assign('help_h5',$this->Lang('help_h5'));
+		$smarty->assign('help_p6',$this->Lang('help_p6'));
+		
+		return $this->ProcessTemplate('help.tpl');
+	}
 
     public function SyntaxGenerateHeader() {
 		
