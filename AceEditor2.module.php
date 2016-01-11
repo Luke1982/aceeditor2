@@ -150,6 +150,7 @@ class AceEditor2 extends CMSModule
 				  var editor = ace.edit($(this).get(0));
 				  var currentMode = $(this).attr('data-cms-lang');
 				  var cssPrefMode = '{$prefs['editor_css_prefmode']}';
+				  initEditorForCMSMS(editor, currentMode);
 				  addToolBar(editor, '{$this->GetModuleURLPath()}', {$AceModes}, currentMode, cssPrefMode);
 				  editor.setTheme('ace/theme/twilight');
 				  editor.setOptions({
@@ -158,6 +159,7 @@ class AceEditor2 extends CMSModule
 					  highlightGutterLine: true,
 					  wrap: 120,
 				  });
+				editor.\$blockScrolling = Infinity;
 			   });
 			});
 			$(window).load(function(){
