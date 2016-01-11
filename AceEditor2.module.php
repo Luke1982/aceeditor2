@@ -151,6 +151,7 @@ class AceEditor2 extends CMSModule
 				  var currentMode = $(this).attr('data-cms-lang');
 				  var cssPrefMode = '{$prefs['editor_css_prefmode']}';
 				  initEditorForCMSMS(editor, currentMode);
+				  initKeyBindings(editor);
 				  addToolBar(editor, '{$this->GetModuleURLPath()}', {$AceModes}, currentMode, cssPrefMode);
 				  editor.setTheme('ace/theme/twilight');
 				  editor.setOptions({
