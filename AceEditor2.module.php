@@ -40,7 +40,7 @@ class AceEditor2 extends CMSModule
 	}
 	
     public function GetVersion() {
-		return "1.03";
+		return "1.05";
 	}
 	
     public function GetFriendlyName() {

@@ -39,5 +39,12 @@ switch($oldversion) {
 		$dir = __DIR__;
 		unlink($dir.'/lib/Ace/src-min/toolbar.css');
 		unlink($dir.'/lib/Ace/src-min/toolbar.js');
+	break;	
+	case "1.03":
+		// Renames the JS and CSS file
+		// Delete the old ones, new ones will be auto downloaded
+		$dir = __DIR__;
+		unlink($dir.'/lib/css/toolbar.css');
+		unlink($dir.'/lib/js/toolbar.js');
 	break;
 }
