@@ -106,6 +106,10 @@ class AceEditor2 extends CMSModule
 		
 		return $this->ProcessTemplate('help.tpl');
 	}
+	
+	public function GetChangelog() {
+		return $this->ProcessTemplate('about.tpl');
+	}
 
     public function SyntaxGenerateHeader() {
 		
