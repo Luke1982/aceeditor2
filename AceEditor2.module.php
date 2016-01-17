@@ -110,8 +110,8 @@ class AceEditor2 extends CMSModule
     public function SyntaxGenerateHeader() {
 		
 		$script_includes = array('ace.js','theme-twilight.js','ext-language_tools.js');
-		$toolbarcss = $this->GetModuleURLPath().'/lib/css/toolbar.css';
-		$toolbarjs = $this->GetModuleURLPath().'/lib/js/toolbar.js';
+		$toolbarcss = $this->GetModuleURLPath().'/lib/css/AceCMSMS.css';
+		$toolbarjs = $this->GetModuleURLPath().'/lib/js/AceInitCMSMS.js';
 		
 		// Setup the modes you want to support, the array key is the select box label,
 		// The value is the filename (mode-{FILENAME}.js)
@@ -145,25 +145,24 @@ class AceEditor2 extends CMSModule
 			<script src="{$toolbarjs}"></script>
 			<link rel="stylesheet" type="text/css" href="{$toolbarcss}">
 			<script type="text/javascript">
-			$(document).ready(function(){
-			   $('textarea.AceEditor2').each(function(){
-				  var editor = ace.edit($(this).get(0));
-				  var currentMode = $(this).attr('data-cms-lang');
-				  var cssPrefMode = '{$prefs['editor_css_prefmode']}';
-				  initEditorForCMSMS(editor, currentMode);
-				  initKeyBindings(editor);
-				  addToolBar(editor, '{$this->GetModuleURLPath()}', {$AceModes}, currentMode, cssPrefMode);
-				  editor.setTheme('ace/theme/twilight');
-				  editor.setOptions({
-					  enableBasicAutocompletion: true,
-					  enableLiveAutocompletion: true,
-					  highlightGutterLine: true,
-					  wrap: 120,
-				  });
-				editor.\$blockScrolling = Infinity;
-			   });
-			});
 			$(window).load(function(){
+			   $('textarea.AceEditor2').each(function(){
+					var originalTextArea = this;
+					var currentMode = originalTextArea.dataset.cmsLang;
+					var cssPrefMode = '{$prefs['editor_css_prefmode']}';
+					var editor = ace.edit($(this).get(0));
+					initAce(editor, originalTextArea);
+					initKeyBindings(editor);
+					addToolBar(editor, '{$this->GetModuleURLPath()}', {$AceModes}, currentMode, cssPrefMode);
+					editor.setTheme('ace/theme/twilight');
+					editor.setOptions({
+						enableBasicAutocompletion: true,
+						enableLiveAutocompletion: true,
+						highlightGutterLine: true,
+						wrap: 120,
+					});
+					editor.\$blockScrolling = Infinity;
+				});
 				aceResize();
 			});
 			</script>
