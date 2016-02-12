@@ -46,13 +46,15 @@ editor_width_pc X,
 editor_height_px X,
 editor_css_prefmode X,
 editor_extensions X,
-editor_pref_fontsize X
+editor_pref_fontsize X,
+editor_soft_wrap X,
+editor_theme X
 ";
 $sqlarray = $dict->CreateTableSQL(CMS_DB_PREFIX.'mod_ace_editor2',$flds,$taboptarray);
 $dict->ExecuteSQLArray($sqlarray);
 
 // Create the first and only line in the table, used to store the preferences
 $db 			= \cms_utils::get_db();
-$sql 			= 'INSERT INTO '.CMS_DB_PREFIX.'mod_ace_editor2 (editor_width_type, editor_width_px, editor_width_pc, editor_height_px, editor_css_prefmode, editor_extensions, editor_pref_fontsize) VALUE (?,?,?,?,?,?,?)';
-$startvalues	= array('pc','800','95','600','css','','16');
+$sql 			= 'INSERT INTO '.CMS_DB_PREFIX.'mod_ace_editor2 (editor_width_type, editor_width_px, editor_width_pc, editor_height_px, editor_css_prefmode, editor_extensions, editor_pref_fontsize) VALUE (?,?,?,?,?,?,?,?,?)';
+$startvalues	= array('pc','800','95','600','css','','16','140','twilight');
 $db->Execute($sql, $startvalues);
