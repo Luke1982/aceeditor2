@@ -48,8 +48,8 @@ switch($oldversion) {
 		unlink($dir.'/lib/js/toolbar.js');
 	break;
 	case "1.05":
-		// Add settings column to the database
+		// Add settings columns to the database
 		$db 			= \cms_utils::get_db();
-		$sql			= 'ALTER TABLE '.CMS_DB_PREFIX.'mod_ace_editor2 ADD COLUMN editor_extensions text AFTER editor_css_prefmode, ADD COLUMN editor_pref_fontsize text AFTER editor_extensions';
+		$sql			= 'ALTER TABLE '.CMS_DB_PREFIX.'mod_ace_editor2 ADD COLUMN editor_extensions text AFTER editor_css_prefmode, ADD COLUMN editor_pref_fontsize text AFTER editor_extensions, ADD COLUMN editor_soft_wrap text AFTER editor_pref_fontsize, ADD COLUMN editor_theme text AFTER editor_soft_wrap';
 	break;
 }
