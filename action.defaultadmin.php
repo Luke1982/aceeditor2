@@ -34,8 +34,12 @@
 if( !defined('CMS_VERSION') ) exit;
 if( !$this->CheckPermission(AceEditor2::MANAGE_PERM) ) return;
 
+
 // Handle the submit action to save preferences
 if (isset($params['submit'])) {
+	// Special handling for the selected extensions
+	$extensions_to_save = $this->handleExtsToSave($params);
+	$params['editor_extensions'] = $extensions_to_save;
 	// Use the class method 'SavePreference' from the AceEditor2 class to save the values
 	// The 'paramname' (from the input name attribute) MUST be the same as the database column name
 	foreach ($params as $paramname => $paramvalue) {
@@ -50,6 +54,9 @@ $ace_prefs = $this->GetCurrentAcePrefs();
 foreach ($ace_prefs as $ace_pref_name => $ace_pref_value) {
 	$smarty->assign($ace_pref_name, $ace_pref_value);
 }
+
+// Send the available extensions to the template
+$smarty->assign('available_extensions', $this->AvailableExtensions());
 
 $tpl = $smarty->CreateTemplate($this->GetTemplateResource('manage_ace_prefs.tpl'),null,null,$smarty);
 $tpl->display();

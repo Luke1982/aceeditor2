@@ -40,6 +40,21 @@
 	color: white;
 }
 
+#AceToolbar.theme-dreamweaver,
+#AceToolbar.theme-chrome,
+#AceToolbar.theme-clouds,
+#AceToolbar.theme-crimson_editor,
+#AceToolbar.theme-dawn,
+#AceToolbar.theme-eclipse,
+#AceToolbar.theme-github,
+#AceToolbar.theme-iplastic {
+	background: white;
+	-webkit-box-shadow: inset 0px 11px 16px 0px rgba(210,210,210, 0.5);
+	-moz-box-shadow:    inset 0px 11px 16px 0px rgba(210,210,210, 0.5);
+	box-shadow:         inset 0px 11px 16px 0px rgba(210,210,210, 0.5);
+	color: black;
+}
+
 #AceBottombar {
 	height: 50px;
 	background: #141414;
@@ -48,6 +63,21 @@
 	box-shadow:         inset 0px -11px 16px 0px rgba(86, 86, 86, 0.5);
 	border-radius: 0 0 7px 7px;
 	margin: -3px 0 0 0;
+}
+
+#AceBottombar.theme-dreamweaver,
+#AceBottombar.theme-chrome,
+#AceBottombar.theme-clouds,
+#AceBottombar.theme-crimson_editor,
+#AceBottombar.theme-dawn,
+#AceBottombar.theme-eclipse,
+#AceBottombar.theme-github,
+#AceBottombar.theme-iplastic {
+	background: white;
+	color: black;
+	-webkit-box-shadow: inset 0px -11px 16px 0px rgba(210,210,210, 0.5);
+	-moz-box-shadow:    inset 0px -11px 16px 0px rgba(210,210,210, 0.5);
+	box-shadow:         inset 0px -11px 16px 0px rgba(210,210,210, 0.5);
 }
 
 .AceModeSelect, .AceTextSize, .AceJumpToLine {

@@ -73,6 +73,12 @@ $(window).load(function(){
 	<label for="editor_height_px">{$mod->Lang('height_pixels_label')}</label><br />
 	<p class="pageinput">
 		<input type="text" size="20" name="{$actionid}editor_height_px" value="{$editor_height_px}">
+	</p><br />
+</div>
+<div class="pageoverflow">
+	<label for="editor_pref_fontsize">{$mod->Lang('pref_fontsize_label')}</label><br />
+	<p class="pageinput">
+		<input type="text" size="20" name="{$actionid}editor_pref_fontsize" value="{$editor_pref_fontsize}">
 	</p>
 </div>
 </fieldset>
@@ -86,7 +92,36 @@ $(window).load(function(){
 		</select>
 	</p>
 </fieldset>
+<fieldset>
+	<p class="pageinput">
+		<h3>{$mod->Lang('ext_theme_fieldset_title')}</h3>
+		<p>{$mod->Lang('ext_description')}</p>
+		{assign 'selected_extensions' value=","|explode:$editor_extensions}
+		{foreach $available_extensions as $extension}
+			<input type="checkbox" name="{$actionid}editor_ext_checkbox_{$extension}" value="{$extension}" {if $extension|in_array:$selected_extensions}checked{/if}>{$extension}<br />
+		{/foreach}
+		<br />
+		<p>{$mod->Lang('theme_description')}</p>
+		<select name="{$actionid}editor_theme">
+			<option value="twilight"{if $editor_theme == 'twilight'} selected{/if}>Twilight</option>
+			<option value="dreamweaver"{if $editor_theme == 'dreamweaver'} selected{/if}>DreamWeaver</option>
+			<option value="ambiance"{if $editor_theme == 'ambiance'} selected{/if}>Ambiance</option>
+			<option value="chaos"{if $editor_theme == 'chaos'} selected{/if}>Chaos</option>
+			<option value="chrome"{if $editor_theme == 'chrome'} selected{/if}>Chrome</option>
+			<option value="clouds"{if $editor_theme == 'clouds'} selected{/if}>Clouds</option>
+			<option value="clouds_midnight"{if $editor_theme == 'clouds_midnight'} selected{/if}>Clouds Midnight</option>
+			<option value="cobalt"{if $editor_theme == 'cobalt'} selected{/if}>Cobalt</option>
+			<option value="crimson_editor"{if $editor_theme == 'crimson_editor'} selected{/if}>Crimson Editor</option>
+			<option value="dawn"{if $editor_theme == 'dawn'} selected{/if}>Dawn</option>
+			<option value="eclipse"{if $editor_theme == 'eclipse'} selected{/if}>Eclipse</option>
+			<option value="github"{if $editor_theme == 'github'} selected{/if}{if $editor_theme == 'dreamweaver'} selected{/if}>Github</option>
+			<option value="idle_fingers"{if $editor_theme == 'idle_fingers'} selected{/if}>Idle Fingers</option>
+			<option value="iplastic"{if $editor_theme == 'iplastic'} selected{/if}>iPlastic</option>
+			<option value="terminal"{if $editor_theme == 'terminal'} selected{/if}>Terminal</option>
+		</select>
+	</p>
+</fieldset>
 <p class="pageinput">
-	<input type="submit" name="{$actionid}submit" value="{$mod->Lang('save_prefs')}"/>
+	<input type="submit" name="{$actionid}submit" value="{$mod->Lang('save_prefs')}">
 </p>
 {form_end}

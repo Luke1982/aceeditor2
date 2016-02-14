@@ -113,10 +113,6 @@ class AceEditor2 extends CMSModule
 
     public function SyntaxGenerateHeader() {
 		
-		$script_includes = array('ace.js','theme-twilight.js','ext-language_tools.js');
-		$toolbarcss = $this->GetModuleURLPath().'/lib/css/AceCMSMS.css';
-		$toolbarjs = $this->GetModuleURLPath().'/lib/js/AceInitCMSMS.js';
-		
 		// Setup the modes you want to support, the array key is the select box label,
 		// The value is the filename (mode-{FILENAME}.js)
 		$AceModes = json_encode(array(
@@ -138,11 +134,28 @@ class AceEditor2 extends CMSModule
 		} else {
 			$width = $prefs['editor_width_px'].'px';
 		}
-		
+
+		// Setup the script includes based on the preferences
+		$script_includes = array(
+			'/lib/Ace/src-min/ace.js',
+			'/lib/Ace/src-min/theme-'.$prefs['editor_theme'].'.js',
+			'/lib/Ace/src-min/ext-language_tools.js'
+		);
+		$toolbarcss = $this->GetModuleURLPath().'/lib/css/AceCMSMS.css';
+		$toolbarjs = $this->GetModuleURLPath().'/lib/js/AceInitCMSMS.js';
+
+		// Get the preferred extensions
+		$pref_exts = explode(",",$prefs['editor_extensions']);
+		foreach($pref_exts as $ext) {
+			$script_includes[] = '/lib/Ace/src-min/ext-'.$ext.'.js';
+			$script_includes[] = '/lib/Ace/exts/'.$ext.'.js';
+			$enableEmmet = ($ext == 'emmet' ? 'editor.setOption("enableEmmet", true);' : '');
+		}
+
 		$out = '';
 		
 		foreach($script_includes as $script_include) {
-			$out .= '<script src="'.$this->GetModuleURLPath().'/lib/Ace/src-min/'.$script_include.'"></script>';
+			$out .= '<script src="'.$this->GetModuleURLPath().$script_include.'"></script>';
 		}
 		
         $out .= <<<EOT
@@ -154,16 +167,20 @@ class AceEditor2 extends CMSModule
 					var originalTextArea = this;
 					var currentMode = originalTextArea.dataset.cmsLang;
 					var cssPrefMode = '{$prefs['editor_css_prefmode']}';
+					var prefFontSize = '{$prefs['editor_pref_fontsize']}';
+					var selectedTheme = '{$prefs['editor_theme']}';
 					var editor = ace.edit($(this).get(0));
 					initAce(editor, originalTextArea);
 					initKeyBindings(editor);
-					addToolBar(editor, '{$this->GetModuleURLPath()}', {$AceModes}, currentMode, cssPrefMode);
-					editor.setTheme('ace/theme/twilight');
+					addToolBar(editor, '{$this->GetModuleURLPath()}', {$AceModes}, currentMode, cssPrefMode, prefFontSize, selectedTheme);
+					editor.setTheme('ace/theme/{$prefs['editor_theme']}');
+					ace.require('ace/ext/emmet');
+					{$enableEmmet}
 					editor.setOptions({
 						enableBasicAutocompletion: true,
 						enableLiveAutocompletion: true,
 						highlightGutterLine: true,
-						wrap: 120,
+						wrap: 120
 					});
 					editor.\$blockScrolling = Infinity;
 				});
@@ -200,4 +217,24 @@ EOT;
 		$row			= $db->GetRow($sql, array(1));
 		return $row;
 	}
+
+	// Method that sets the available extensions
+	public function AvailableExtensions() {
+		return array(
+				'emmet'
+			);
+	}
+
+	public function handleExtsToSave($params=array()) {
+		// Takes all save parameters, filters on the extensions
+		// and returns a comma delimited collection
+		$extensions = array();
+		foreach ($params as $paramname => $paramvalue) {
+			if (strpos($paramname, 'ext_checkbox')) {
+				$extensions[] = $paramvalue;
+			}
+		}
+		return implode(",",$extensions);
+	}
+
 }
