@@ -81,6 +81,12 @@ $(window).load(function(){
 		<input type="text" size="20" name="{$actionid}editor_pref_fontsize" value="{$editor_pref_fontsize}">
 	</p>
 </div>
+<div class="pageoverflow">
+	<label for="editor_soft_wrap">{$mod->Lang('pref_softwrap_label')}</label><br />
+	<p class="pageinput">
+		<input type="text" size="20" name="{$actionid}editor_soft_wrap" value="{$editor_soft_wrap}">
+	</p>
+</div>
 </fieldset>
 <fieldset>
 	<label for="editor_css_prefmode">{$mod->Lang('css_prefmode_label')}</label><br />
@@ -98,7 +104,12 @@ $(window).load(function(){
 		<p>{$mod->Lang('ext_description')}</p>
 		{assign 'selected_extensions' value=","|explode:$editor_extensions}
 		{foreach $available_extensions as $extension}
-			<input type="checkbox" name="{$actionid}editor_ext_checkbox_{$extension}" value="{$extension}" {if $extension|in_array:$selected_extensions}checked{/if}>{$extension}<br />
+			<input type="checkbox" name="{$actionid}editor_ext_checkbox_{$extension}" value="{$extension}" {if $extension|in_array:$selected_extensions}checked{/if}>{$extension}.
+			<!-- Give a warning about mode choice when emmet is active -->
+			{if $extension|in_array:$selected_extensions && $extension == 'emmet'}
+				<b>{$mod->Lang('emmet_mode_warning')}</b>
+			{/if}
+			<br />
 		{/foreach}
 		<br />
 		<p>{$mod->Lang('theme_description')}</p>
