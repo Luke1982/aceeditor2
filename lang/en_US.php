@@ -45,6 +45,7 @@ $lang['width_perc_label'] 		= 'Slide to the desired percentage (between 5% and 9
 $lang['width_pixels_label'] 	= 'Enter the desired width in pixels';
 $lang['height_pixels_label'] 	= 'Enter the desired height in pixels';
 $lang['pref_fontsize_label']	= 'Enter your preferred default font size, just the digits in the range from 8 - 20';
+$lang['pref_softwrap_label']	= 'Enter the amount of softwrap characters you prefer. This is the number of characters after which a new line will begin, even though there might be enough horizontal space left.';
 $lang['save_prefs'] 			= 'Save Ace Preferences';
 $lang['pref_saved_mess']		= 'Ace Preferences saved';
 $lang['css_prefmode_label']		= 'In case of editing CSS, select your prefered mode';
@@ -54,6 +55,7 @@ $lang['cssmode_sass']			= 'SASS';
 $lang['ext_theme_fieldset_title'] = 'Manage themes and extensions';
 $lang['ext_description'] 		= 'Select extensions to use';
 $lang['theme_description']		= 'Select a theme';
+$lang['emmet_mode_warning']		= 'Warning: Emmet abbreviations will not work in Smarty mode. When editing smarty templates, select HTML mode to be able to use emmet.';
 
 // Help page
 $lang['help_title']				= 'About the Ace Editor for CMSMS 2.x';
