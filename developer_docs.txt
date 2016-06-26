@@ -1,0 +1,10 @@
+/* A small document where developer notes are stored,
+/* not much structure here now.
+
+/* ==== EXTENSIONS ==== */
+
+Extensions are made available in the AceEditor2.module.php file, in the class method 'AvailableExtensions'. This method simply returns an array of extension names. Selected extensions are stored as a comma separated list in the database field. The template 'file manage_ace_prefs.tpl' then creates a checkbox for each extension.
+
+Storing the selected extensions is done through the 'handleExtsToSave' method in 'action.defaultadmin.php'. This method takes all params and filters on the paramnames that contain 'ext_checkbox'. It is therefor IMPORTANT that that part is NOT taken out of the checkbox name in the 'manage_ace_prefs.tpl' file.
+
+The 'manage_ace_prefs.tpl' file takes the selected extensions loaded from the database and creates an array called 'selected_extensions'. For each available extension there is a check done to see if it was previously selected. If so, 'checked' is added to the checkbox.
