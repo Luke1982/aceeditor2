@@ -40,7 +40,7 @@ class AceEditor2 extends CMSModule
 	}
 	
     public function GetVersion() {
-		return "2";
+		return "2_BETA";
 	}
 	
     public function GetFriendlyName() {
@@ -180,7 +180,7 @@ class AceEditor2 extends CMSModule
 						enableBasicAutocompletion: true,
 						enableLiveAutocompletion: true,
 						highlightGutterLine: true,
-						wrap: 120
+						wrap: {$prefs['editor_soft_wrap']}
 					});
 					editor.\$blockScrolling = Infinity;
 				});
